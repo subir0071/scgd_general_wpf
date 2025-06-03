@@ -4,10 +4,7 @@
 name: .NET
 
 on:
-  push:
-    branches: [ "develop" ]
-  pull_request:
-    branches: [ "develop" ]
+  workflow_dispatch:
 
 jobs:
   build:
@@ -32,17 +29,17 @@ jobs:
       run: |
         msbuild build.sln /p:Configuration=Release /p:Platform=x64
         
-    - name: Publish to NuGet
-      env:
-        NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
-        GH_TOKEN: ${{ secrets.GH_TOKEN }}
-      run: |
-        dotnet nuget push .\UI\ColorVision.Common\bin\x64\Release\*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
-        dotnet nuget push .\UI\ColorVision.UI\bin\x64\Release\*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
-        dotnet nuget push .\UI\ColorVision.Themes\bin\x64\Release\*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
-        dotnet nuget push .\UI\ColorVision.Solution\bin\x64\Release\*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
-        dotnet nuget push .\UI\ColorVision.Scheduler\bin\x64\Release\*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
-        dotnet nuget push .\UI\ColorVision.Core\bin\x64\Release\*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
-        dotnet nuget push .\UI\ColorVision.ImageEditor\bin\x64\Release\*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
+    # - name: Publish to NuGet
+    #   env:
+    #     NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+    #     GH_TOKEN: ${{ secrets.GH_TOKEN }}
+    #   run: |
+    #     dotnet nuget push .\UI\ColorVision.Common\bin\x64\Release\*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
+    #     dotnet nuget push .\UI\ColorVision.UI\bin\x64\Release\*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
+    #     dotnet nuget push .\UI\ColorVision.Themes\bin\x64\Release\*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
+    #     dotnet nuget push .\UI\ColorVision.Solution\bin\x64\Release\*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
+    #     dotnet nuget push .\UI\ColorVision.Scheduler\bin\x64\Release\*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
+    #     dotnet nuget push .\UI\ColorVision.Core\bin\x64\Release\*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
+    #     dotnet nuget push .\UI\ColorVision.ImageEditor\bin\x64\Release\*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
 
       
