@@ -27,7 +27,8 @@ jobs:
     
     - name: Build C++ project with MSBuild
       run: |
-        dotnet build.sln /p:Configuration=Release /p:Platform=x64
+        dotnet build build.sln --configuration Release
+        
         
     # - name: Publish to NuGet
     #   env:
