@@ -19,10 +19,10 @@ jobs:
       with:
         dotnet-version: 8.0.x
         
-    - name: Restore dependencies
-      run: |
-        # dotnet restore build.sln
-        dotnet restore build.sln /p:BuildWithNetFrameworkHostedCompiler=true
+    # - name: Restore dependencies
+    #   run: |
+    #     # dotnet restore build.sln
+    #     dotnet restore build.sln /p:BuildWithNetFrameworkHostedCompiler=true
       
     - name: Setup MSBuild path
       uses: microsoft/setup-msbuild@v1.1
@@ -33,7 +33,7 @@ jobs:
     
     - name: Build C++ project with MSBuild
       run: |
-        msbuild build.sln /p:Configuration=Release /p:Platform=x64
+        msbuild build.sln /restore /p:Configuration=Release /p:Platform=x64
         
     # - name: Publish to NuGet
     #   env:
